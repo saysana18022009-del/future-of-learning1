@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future of Learning — The Next Era of Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a14;
+    --surface: #0d1b2e;
+    --card: #0f2035;
+    --accent1: #00f5d4;
+    --accent2: #7b2fff;
+    --accent3: #ff6b35;
+    --accent4: #ffd60a;
+    --text: #e8edf5;
+    --text-dim: #7a8fa6;
+    --border: rgba(0,245,212,0.15);
+    --glow: 0 0 30px rgba(0,245,212,0.2);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    overflow-x:hidden;
+  }
+  /* STARS BG */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(123,47,255,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(0,245,212,0.06) 0%, transparent 50%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    background:rgba(5,10,20,0.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .nav-logo{
+    font-family:'Syne',sans-serif;
+    font-weight:800;font-size:1.2rem;
+    background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    letter-spacing:-0.02em;
+  }
+  .nav-links{
+    display:flex;gap:0.2rem;
+    list-style:none;
+    flex-wrap:wrap;
+  }
+  .nav-links a{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:0.78rem;
+    font-weight:500;
+    padding:0.4rem 0.7rem;
+    border-radius:6px;
+    transition:all 0.2s;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{color:var(--accent1);background:rgba(0,245,212,0.08)}
+
+  /* SECTIONS */
+  section{position:relative;z-index:1}
+
+  /* HERO */
+  #home{
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:8rem 2rem 4rem;
+    overflow:hidden;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    border:1px solid var(--accent1);
+    border-radius:100px;
+    padding:0.4rem 1rem;
+    font-size:0.8rem;
+    color:var(--accent1);
+    font-family:'Space Mono',monospace;
+    margin-bottom:2rem;
+    animation:fadeDown 0.8s ease both;
+  }
+  .hero-badge .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent1);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+  .hero-title{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(3rem,8vw,7rem);
+    font-weight:800;
+    line-height:1;
+    letter-spacing:-0.04em;
+    margin-bottom:1.5rem;
+    animation:fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-title .line2{
+    background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 50%,var(--accent3) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{
+    font-size:clamp(1rem,2vw,1.25rem);
+    color:var(--text-dim);
+    max-width:650px;
+    line-height:1.7;
+    margin-bottom:3rem;
+    animation:fadeUp 0.9s 0.2s ease both;
+  }
+  .hero-cta{
+    display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+    animation:fadeUp 0.9s 0.3s ease both;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    color:#000;font-weight:700;
+    padding:0.85rem 2rem;border-radius:12px;
+    text-decoration:none;font-size:0.95rem;
+    transition:transform 0.2s,box-shadow 0.2s;
+    border:none;cursor:pointer;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,245,212,0.4)}
+  .btn-outline{
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:0.85rem 2rem;border-radius:12px;
+    text-decoration:none;font-size:0.95rem;
+    transition:all 0.2s;background:transparent;cursor:pointer;
+  }
+  .btn-outline:hover{border-color:var(--accent1);color:var(--accent1)}
+
+  .hero-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+    margin-top:5rem;width:100%;max-width:900px;
+    animation:fadeUp 0.9s 0.4s ease both;
+  }
+  .hero-stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:1.5rem 1rem;
+    text-align:center;
+  }
+  .hero-stat .num{
+    font-family:'Syne',sans-serif;
+    font-size:2rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-stat .lbl{font-size:0.78rem;color:var(--text-dim);margin-top:0.3rem}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* SECTION HEADER */
+  .sec-header{text-align:center;margin-bottom:4rem}
+  .sec-tag{
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;letter-spacing:0.15em;
+    color:var(--accent1);
+    text-transform:uppercase;
+    display:block;margin-bottom:0.8rem;
+  }
+  .sec-title{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(2rem,5vw,3.5rem);
+    font-weight:800;letter-spacing:-0.03em;line-height:1.1;
+  }
+  .sec-sub{
+    color:var(--text-dim);
+    margin-top:1rem;
+    font-size:1.05rem;
+    max-width:600px;margin-left:auto;margin-right:auto;
+  }
+
+  /* CONTAINER */
+  .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+  .section-pad{padding:6rem 0}
+
+  /* AI LEARNING */
+  #ai-learning{background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
+  .ai-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+  }
+  .ai-visual{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:2rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .ai-visual::before{
+    content:'';position:absolute;top:-50%;left:-50%;
+    width:200%;height:200%;
+    background:conic-gradient(transparent 0deg,rgba(0,245,212,0.05) 60deg,transparent 120deg);
+    animation:spin 8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ai-chat{display:flex;flex-direction:column;gap:1rem;position:relative;z-index:1}
+  .chat-bubble{
+    padding:0.9rem 1.2rem;border-radius:16px;
+    max-width:85%;font-size:0.88rem;line-height:1.5;
+  }
+  .chat-ai{
+    background:linear-gradient(135deg,rgba(0,245,212,0.1),rgba(123,47,255,0.1));
+    border:1px solid rgba(0,245,212,0.2);
+    align-self:flex-start;
+  }
+  .chat-ai strong{color:var(--accent1);display:block;margin-bottom:0.3rem;font-size:0.75rem}
+  .chat-user{
+    background:rgba(123,47,255,0.15);
+    border:1px solid rgba(123,47,255,0.3);
+    align-self:flex-end;
+  }
+  .chat-user strong{color:var(--accent2);display:block;margin-bottom:0.3rem;font-size:0.75rem}
+  .ai-features{display:flex;flex-direction:column;gap:1.5rem}
+  .ai-feature{
+    display:flex;gap:1rem;align-items:flex-start;
+    padding:1.2rem;border-radius:16px;
+    background:var(--card);border:1px solid var(--border);
+    transition:border-color 0.3s,transform 0.3s;
+  }
+  .ai-feature:hover{border-color:var(--accent1);transform:translateX(4px)}
+  .feat-icon{
+    width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;flex-shrink:0;
+  }
+
+  /* VR CLASSROOM */
+  #vr-classroom{padding:6rem 0}
+  .vr-scene{
+    width:100%;border-radius:24px;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:3rem 2rem;
+    margin-bottom:3rem;
+    text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .vr-scene::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(123,47,255,0.1),rgba(0,245,212,0.05));
+  }
+  .vr-title{
+    font-family:'Syne',sans-serif;
+    font-size:3rem;font-weight:800;
+    background:linear-gradient(135deg,#a78bfa,#00f5d4);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    position:relative;z-index:1;
+    margin-bottom:1rem;
+  }
+  .vr-desc{color:var(--text-dim);position:relative;z-index:1;max-width:600px;margin:0 auto 2rem}
+  .vr-objects{
+    display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+    position:relative;z-index:1;
+  }
+  .vr-obj{
+    width:90px;height:90px;border-radius:20px;
+    background:rgba(123,47,255,0.2);
+    border:2px solid rgba(123,47,255,0.4);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    font-size:2rem;
+    transition:transform 0.3s,box-shadow 0.3s;
+    cursor:pointer;
+    animation:float 3s ease-in-out infinite;
+  }
+  .vr-obj:hover{transform:scale(1.1) translateY(-5px);box-shadow:0 10px 30px rgba(123,47,255,0.4)}
+  .vr-obj:nth-child(2){animation-delay:0.5s}
+  .vr-obj:nth-child(3){animation-delay:1s}
+  .vr-obj:nth-child(4){animation-delay:1.5s}
+  .vr-obj:nth-child(5){animation-delay:2s}
+  .vr-obj span{font-size:0.65rem;color:var(--accent2);margin-top:0.3rem;font-weight:600}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .vr-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .vr-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:1.8rem;
+    transition:border-color 0.3s;
+  }
+  .vr-card:hover{border-color:var(--accent2)}
+  .vr-card .icon{font-size:2rem;margin-bottom:1rem}
+  .vr-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem}
+  .vr-card p{font-size:0.85rem;color:var(--text-dim);line-height:1.6}
+
+  /* SMART EDUCATION */
+  #smart-education{background:var(--surface);padding:6rem 0}
+  .smart-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .smart-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:2rem;
+    transition:all 0.3s;
+    position:relative;overflow:hidden;
+  }
+  .smart-card::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:var(--accent-c,var(--accent1));
+    transform:scaleX(0);transform-origin:left;
+    transition:transform 0.3s;
+  }
+  .smart-card:hover::after{transform:scaleX(1)}
+  .smart-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+  .smart-card .num{
+    font-family:'Space Mono',monospace;
+    font-size:0.75rem;color:var(--text-dim);
+    margin-bottom:1rem;
+  }
+  .smart-card h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.8rem}
+  .smart-card p{font-size:0.88rem;color:var(--text-dim);line-height:1.65}
+
+  /* QUIZ */
+  #quiz{padding:6rem 0}
+  .quiz-container{
+    max-width:700px;margin:0 auto;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:24px;padding:2.5rem;
+  }
+  .quiz-progress{
+    display:flex;gap:0.5rem;margin-bottom:2rem;
+  }
+  .q-dot{
+    height:6px;flex:1;border-radius:100px;
+    background:rgba(255,255,255,0.1);
+    transition:background 0.3s;
+  }
+  .q-dot.active{background:var(--accent1)}
+  .q-dot.done{background:var(--accent2)}
+  .quiz-question{
+    font-family:'Syne',sans-serif;
+    font-size:1.3rem;font-weight:700;
+    margin-bottom:2rem;line-height:1.4;
+  }
+  .quiz-options{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem}
+  .q-option{
+    padding:1rem 1.2rem;border-radius:12px;
+    border:1px solid var(--border);
+    background:transparent;color:var(--text);
+    text-align:left;cursor:pointer;
+    font-size:0.92rem;transition:all 0.2s;
+    font-family:'DM Sans',sans-serif;
+  }
+  .q-option:hover{border-color:var(--accent1);background:rgba(0,245,212,0.05)}
+  .q-option.correct{border-color:#00f5d4;background:rgba(0,245,212,0.1);color:var(--accent1)}
+  .q-option.wrong{border-color:var(--accent3);background:rgba(255,107,53,0.1);color:var(--accent3)}
+  .quiz-feedback{
+    padding:1rem 1.2rem;border-radius:12px;
+    margin-bottom:1.5rem;font-size:0.9rem;display:none;
+  }
+  .quiz-footer{display:flex;justify-content:space-between;align-items:center}
+  .quiz-score{font-family:'Space Mono',monospace;font-size:0.85rem;color:var(--text-dim)}
+  #quiz-result{display:none;text-align:center;padding:2rem 0}
+  #quiz-result .score-big{
+    font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent1),var(--accent4));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+
+  /* MINI GAME */
+  #mini-game{background:var(--surface);padding:6rem 0}
+  .game-area{
+    max-width:700px;margin:0 auto;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:24px;padding:2.5rem;
+    text-align:center;
+  }
+  .game-board{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0.8rem;margin:2rem 0;
+  }
+  .game-card{
+    aspect-ratio:1;border-radius:14px;
+    border:2px solid var(--border);
+    background:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;cursor:pointer;
+    transition:all 0.2s;user-select:none;
+  }
+  .game-card:hover:not(.flipped):not(.matched){
+    border-color:var(--accent2);transform:scale(1.05);
+  }
+  .game-card.flipped,.game-card.matched{background:rgba(123,47,255,0.15);border-color:var(--accent2)}
+  .game-card.matched{background:rgba(0,245,212,0.1);border-color:var(--accent1)}
+  .game-card .back{display:none}
+  .game-card .front{font-size:1.5rem}
+  .game-stats-row{display:flex;justify-content:center;gap:3rem;margin-bottom:1rem}
+  .g-stat .label{font-size:0.75rem;color:var(--text-dim);margin-bottom:0.2rem}
+  .g-stat .value{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--accent1)}
+
+  /* SMART LEARNING */
+  #smart-learning{padding:6rem 0}
+  .learning-paths{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+  .path-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:2rem;
+    transition:all 0.3s;
+  }
+  .path-card:hover{border-color:var(--accent1);box-shadow:var(--glow)}
+  .path-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem}
+  .path-icon{font-size:2.5rem}
+  .path-badge{
+    font-size:0.7rem;font-weight:700;padding:0.3rem 0.7rem;
+    border-radius:100px;letter-spacing:0.05em;
+  }
+  .badge-new{background:rgba(0,245,212,0.15);color:var(--accent1);border:1px solid rgba(0,245,212,0.3)}
+  .badge-hot{background:rgba(255,107,53,0.15);color:var(--accent3);border:1px solid rgba(255,107,53,0.3)}
+  .badge-ai{background:rgba(123,47,255,0.15);color:var(--accent2);border:1px solid rgba(123,47,255,0.3)}
+  .badge-vr{background:rgba(255,214,10,0.15);color:var(--accent4);border:1px solid rgba(255,214,10,0.3)}
+  .path-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+  .path-desc{font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:1.2rem}
+  .path-progress{height:6px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;margin-bottom:0.5rem}
+  .path-bar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+  .path-meta{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-dim)}
+
+  /* BENEFITS */
+  #benefits{background:var(--surface);padding:6rem 0}
+  .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .benefit-item{
+    display:flex;gap:1.2rem;padding:1.8rem;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;
+    transition:all 0.3s;
+    align-items:flex-start;
+  }
+  .benefit-item:hover{border-color:var(--accent1);transform:translateY(-2px)}
+  .b-icon{
+    width:50px;height:50px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.4rem;flex-shrink:0;
+  }
+  .b-content h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.4rem}
+  .b-content p{font-size:0.85rem;color:var(--text-dim);line-height:1.6}
+
+  /* CHALLENGES */
+  #challenges{padding:6rem 0}
+  .challenges-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  .challenge-list{display:flex;flex-direction:column;gap:1rem}
+  .challenge-item{
+    display:flex;gap:1rem;padding:1.2rem;
+    border-radius:16px;background:var(--card);border:1px solid rgba(255,107,53,0.15);
+    align-items:flex-start;
+  }
+  .c-num{
+    font-family:'Space Mono',monospace;font-size:0.75rem;
+    color:var(--accent3);width:30px;flex-shrink:0;margin-top:2px;
+  }
+  .c-text h5{font-weight:600;margin-bottom:0.3rem;font-size:0.95rem}
+  .c-text p{font-size:0.82rem;color:var(--text-dim);line-height:1.5}
+  .solution-box{
+    background:linear-gradient(135deg,rgba(0,245,212,0.05),rgba(123,47,255,0.05));
+    border:1px solid var(--border);border-radius:20px;
+    padding:2.5rem;
+  }
+  .solution-box h3{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
+  .sol-item{display:flex;gap:0.8rem;margin-bottom:1.2rem;align-items:flex-start}
+  .sol-check{color:var(--accent1);font-size:1.1rem;flex-shrink:0;margin-top:2px}
+  .sol-text{font-size:0.88rem;color:var(--text-dim);line-height:1.6}
+
+  /* FUTURE PREDICTION */
+  #predictions{background:var(--surface);padding:6rem 0}
+  .predict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .predict-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:2rem;
+    transition:all 0.3s;
+    text-align:center;
+  }
+  .predict-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+  .predict-year{
+    font-family:'Space Mono',monospace;
+    font-size:0.8rem;color:var(--accent1);
+    border:1px solid var(--border);
+    border-radius:100px;display:inline-block;
+    padding:0.3rem 0.9rem;margin-bottom:1rem;
+  }
+  .predict-icon{font-size:2.5rem;margin-bottom:1rem}
+  .predict-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+  .predict-desc{font-size:0.83rem;color:var(--text-dim);line-height:1.6}
+  .predict-prob{
+    margin-top:1rem;font-family:'Space Mono',monospace;font-size:0.8rem;
+    color:var(--accent4);
+  }
+
+  /* FUTURE CLASSROOM SIM */
+  #classroom-sim{padding:6rem 0}
+  .classroom-wrapper{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:24px;overflow:hidden;
+  }
+  .classroom-header{
+    background:linear-gradient(135deg,rgba(123,47,255,0.2),rgba(0,245,212,0.1));
+    padding:1.5rem 2rem;
+    display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid var(--border);
+  }
+  .classroom-header h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700}
+  .live-badge{
+    display:flex;align-items:center;gap:0.5rem;
+    background:rgba(255,107,53,0.15);
+    border:1px solid rgba(255,107,53,0.3);
+    color:var(--accent3);padding:0.3rem 0.8rem;
+    border-radius:100px;font-size:0.75rem;font-weight:600;
+  }
+  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);animation:pulse 1.5s infinite}
+  .classroom-body{display:grid;grid-template-columns:1fr 320px;min-height:400px}
+  .class-main{padding:2rem;border-right:1px solid var(--border)}
+  .screen{
+    background:#000;border-radius:16px;
+    aspect-ratio:16/9;display:flex;
+    align-items:center;justify-content:center;
+    border:2px solid rgba(123,47,255,0.3);
+    position:relative;overflow:hidden;
+    margin-bottom:1.5rem;
+  }
+  .screen-content{text-align:center;z-index:1}
+  .screen-content h4{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--accent1);margin-bottom:0.5rem}
+  .screen-content p{font-size:0.85rem;color:rgba(255,255,255,0.6)}
+  .screen::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(45deg,rgba(123,47,255,0.1),rgba(0,245,212,0.05));
+    animation:shimmer 3s infinite;
+  }
+  @keyframes shimmer{0%,100%{opacity:0.5}50%{opacity:1}}
+  .screen-controls{display:flex;gap:0.8rem}
+  .ctrl-btn{
+    padding:0.6rem 1.2rem;border-radius:10px;
+    border:1px solid var(--border);background:var(--surface);
+    color:var(--text);cursor:pointer;font-size:0.82rem;
+    transition:all 0.2s;
+  }
+  .ctrl-btn:hover{border-color:var(--accent1);color:var(--accent1)}
+  .ctrl-btn.active{background:rgba(0,245,212,0.1);border-color:var(--accent1);color:var(--accent1)}
+  .class-panel{padding:1.5rem;background:var(--surface)}
+  .panel-title{font-size:0.8rem;font-weight:600;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+  .student-list{display:flex;flex-direction:column;gap:0.7rem}
+  .student-item{
+    display:flex;gap:0.8rem;align-items:center;
+    padding:0.7rem 0.9rem;border-radius:12px;
+    background:var(--card);
+  }
+  .s-avatar{
+    width:34px;height:34px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;flex-shrink:0;
+  }
+  .s-info{flex:1}
+  .s-name{font-size:0.85rem;font-weight:600}
+  .s-status{font-size:0.72rem;color:var(--text-dim)}
+  .s-score{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--accent1)}
+
+  /* TIMELINE */
+  #timeline{background:var(--surface);padding:6rem 0}
+  .timeline-track{position:relative;padding:0 0 0 3rem}
+  .timeline-track::before{
+    content:'';position:absolute;left:1rem;top:0;bottom:0;
+    width:2px;background:linear-gradient(180deg,var(--accent2),var(--accent1));
+    border-radius:100px;
+  }
+  .t-item{
+    position:relative;margin-bottom:3rem;
+    padding-left:1rem;
+  }
+  .t-item:last-child{margin-bottom:0}
+  .t-dot{
+    position:absolute;left:-2.65rem;top:0.3rem;
+    width:14px;height:14px;border-radius:50%;
+    border:3px solid var(--accent1);
+    background:var(--bg);
+    transition:transform 0.3s;
+  }
+  .t-item:hover .t-dot{transform:scale(1.4)}
+  .t-year{
+    font-family:'Space Mono',monospace;font-size:0.75rem;
+    color:var(--accent1);margin-bottom:0.5rem;letter-spacing:0.1em;
+  }
+  .t-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem}
+  .t-desc{font-size:0.88rem;color:var(--text-dim);line-height:1.65;max-width:700px}
+  .t-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem}
+  .t-tag{
+    font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:100px;
+    background:rgba(123,47,255,0.15);color:var(--accent2);
+    border:1px solid rgba(123,47,255,0.2);
+  }
+
+  /* AI Q&A */
+  #qa-section{padding:6rem 0}
+  .qa-box{
+    max-width:800px;margin:0 auto;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:24px;padding:2.5rem;
+  }
+  .qa-messages{
+    min-height:300px;max-height:420px;
+    overflow-y:auto;margin-bottom:1.5rem;
+    display:flex;flex-direction:column;gap:1rem;
+    padding-right:0.5rem;
+  }
+  .qa-messages::-webkit-scrollbar{width:4px}
+  .qa-messages::-webkit-scrollbar-track{background:transparent}
+  .qa-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px}
+  .msg{padding:1rem 1.2rem;border-radius:14px;max-width:90%;font-size:0.9rem;line-height:1.6}
+  .msg-ai{
+    background:rgba(0,245,212,0.07);
+    border:1px solid rgba(0,245,212,0.15);
+    align-self:flex-start;
+  }
+  .msg-ai .sender{font-size:0.72rem;color:var(--accent1);font-weight:700;margin-bottom:0.3rem;font-family:'Space Mono',monospace}
+  .msg-user{
+    background:rgba(123,47,255,0.12);
+    border:1px solid rgba(123,47,255,0.2);
+    align-self:flex-end;
+  }
+  .qa-input-row{display:flex;gap:0.8rem}
+  .qa-input{
+    flex:1;background:var(--surface);
+    border:1px solid var(--border);border-radius:12px;
+    padding:0.85rem 1.2rem;color:var(--text);
+    font-family:'DM Sans',sans-serif;font-size:0.92rem;
+    outline:none;transition:border-color 0.2s;
+  }
+  .qa-input:focus{border-color:var(--accent1)}
+  .qa-input::placeholder{color:var(--text-dim)}
+  .qa-send{
+    background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    color:#000;font-weight:700;
+    padding:0 1.5rem;border-radius:12px;
+    border:none;cursor:pointer;font-size:0.9rem;
+    transition:transform 0.2s,box-shadow 0.2s;
+    white-space:nowrap;
+  }
+  .qa-send:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,245,212,0.3)}
+  .qa-suggestions{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .qa-pill{
+    font-size:0.78rem;padding:0.35rem 0.85rem;
+    border-radius:100px;border:1px solid var(--border);
+    background:transparent;color:var(--text-dim);
+    cursor:pointer;transition:all 0.2s;
+  }
+  .qa-pill:hover{border-color:var(--accent1);color:var(--accent1)}
+  .typing-indicator{display:flex;gap:4px;align-items:center;padding:0.5rem}
+  .typing-dot{width:8px;height:8px;border-radius:50%;background:var(--accent1);animation:typing 1.2s infinite}
+  .typing-dot:nth-child(2){animation-delay:0.2s}
+  .typing-dot:nth-child(3){animation-delay:0.4s}
+  @keyframes typing{0%,80%,100%{transform:scale(0.7);opacity:0.4}40%{transform:scale(1);opacity:1}}
+
+  /* FOOTER */
+  footer{
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    padding:3rem 2rem;
+    text-align:center;
+  }
+  .footer-logo{
+    font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    margin-bottom:0.5rem;
+  }
+  footer p{color:var(--text-dim);font-size:0.85rem}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .ai-grid,.challenges-split,.classroom-body{grid-template-columns:1fr}
+    .hero-grid{grid-template-columns:repeat(2,1fr)}
+    .smart-grid,.vr-cards,.predict-grid,.learning-paths,.benefits-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .timeline-track{padding-left:2rem}
+  }
+
+  /* SCROLL ANIMATION */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s,transform 0.6s}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🎓 FutureLearn</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#ai-learning">AI Learning</a></li>
+    <li><a href="#vr-classroom">VR Classroom</a></li>
+    <li><a href="#smart-education">Smart Edu</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#mini-game">Game</a></li>
+    <li><a href="#smart-learning">Smart Learning</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#challenges">Challenges</a></li>
+    <li><a href="#predictions">Predictions</a></li>
+    <li><a href="#classroom-sim">Classroom Sim</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#qa-section">Ask AI</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-badge"><span class="dot"></span> The Education Revolution Starts Now</div>
+  <h1 class="hero-title">
+    The Future<br>
+    <span class="line2">of Learning</span>
+  </h1>
+  <p class="hero-sub">Education is being transformed by Artificial Intelligence, Virtual Reality, adaptive algorithms and immersive technology. Discover how learning will evolve — and what it means for every student on the planet.</p>
+  <div class="hero-cta">
+    <a href="#ai-learning" class="btn-primary">Explore Now →</a>
+    <a href="#qa-section" class="btn-outline">Ask AI Tutor</a>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-stat"><div class="num">4.7B</div><div class="lbl">Learners worldwide by 2030</div></div>
+    <div class="hero-stat"><div class="num">$404B</div><div class="lbl">EdTech market by 2025</div></div>
+    <div class="hero-stat"><div class="num">92%</div><div class="lbl">AI personalization boost</div></div>
+    <div class="hero-stat"><div class="num">300%</div><div class="lbl">VR engagement increase</div></div>
+  </div>
+</section>
+
+<!-- AI LEARNING -->
+<section id="ai-learning">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 01 — AI LEARNING</span>
+      <h2 class="sec-title">Intelligence That<br>Teaches Back</h2>
+      <p class="sec-sub">AI doesn't just assist learning — it revolutionizes it. From real-time feedback to fully personalized curricula built around each learner's mind.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-visual reveal">
+        <div class="ai-chat">
+          <div class="chat-bubble chat-ai"><strong>🤖 AI Tutor</strong>Great! Let's explore quantum mechanics. Based on your learning style, I'll use visual analogies. Imagine electrons as musical notes — each with a unique frequency...</div>
+          <div class="chat-bubble chat-user"><strong>👤 Student</strong>That makes sense! So the wave function is like a chord?</div>
+          <div class="chat-bubble chat-ai"><strong>🤖 AI Tutor</strong>Exactly! A chord of possibilities. The act of measurement "plays" one note — collapsing the superposition. Your intuition is excellent. Ready for the next level?</div>
+          <div class="chat-bubble chat-user"><strong>👤 Student</strong>Yes! Can you show me a simulation?</div>
+          <div class="chat-bubble chat-ai"><strong>🤖 AI Tutor</strong>Launching interactive quantum sim now. I've adjusted difficulty to your current mastery score of 78%. You learn 40% faster with visual simulations. ⚡</div>
+        </div>
+      </div>
+      <div class="ai-features reveal">
+        <div class="ai-feature">
+          <div class="feat-icon" style="background:rgba(0,245,212,0.1)">🧠</div>
+          <div>
+            <h4 style="font-weight:700;margin-bottom:0.4rem">Adaptive Learning Algorithms</h4>
+            <p style="font-size:0.85rem;color:var(--text-dim)">AI continuously maps each student's knowledge graph, adjusting content difficulty, pacing, and explanation style in real-time to maximize retention and reduce frustration.</p>
+          </div>
+        </div>
+        <div class="ai-feature">
+          <div class="feat-icon" style="background:rgba(123,47,255,0.1)">📊</div>
+          <div>
+            <h4 style="font-weight:700;margin-bottom:0.4rem">Predictive Analytics</h4>
+            <p style="font-size:0.85rem;color:var(--text-dim)">Machine learning models predict which students are at risk of falling behind up to 3 weeks in advance, enabling proactive intervention by educators before problems arise.</p>
+          </div>
+        </div>
+        <div class="ai-feature">
+          <div class="feat-icon" style="background:rgba(255,107,53,0.1)">🗣️</div>
+          <div>
+            <h4 style="font-weight:700;margin-bottom:0.4rem">Natural Language Processing</h4>
+            <p style="font-size:0.85rem;color:var(--text-dim)">Students can ask questions in plain language, receive Socratic dialogue, instant essay feedback, and automated grading with detailed, constructive explanations.</p>
+          </div>
+        </div>
+        <div class="ai-feature">
+          <div class="feat-icon" style="background:rgba(255,214,10,0.1)">🎯</div>
+          <div>
+            <h4 style="font-weight:700;margin-bottom:0.4rem">Emotion & Engagement Detection</h4>
+            <p style="font-size:0.85rem;color:var(--text-dim)">Computer vision analyzes facial expressions and behavioral cues to detect confusion, boredom, or frustration — adjusting content delivery to re-engage students instantly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VR CLASSROOM -->
+<section id="vr-classroom">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 02 — VR CLASSROOM</span>
+      <h2 class="sec-title">Step Inside<br>Your Lesson</h2>
+      <p class="sec-sub">Virtual Reality transforms passive reading into active experience. Walk through ancient Rome, dissect a cell from the inside, or practice surgery — all without leaving your classroom.</p>
+    </div>
+    <div class="vr-scene reveal">
+      <h3 class="vr-title">🥽 Virtual Learning Environment</h3>
+      <p class="vr-desc">Enter immersive 3D worlds where every subject becomes an adventure. Hover over objects to explore them.</p>
+      <div class="vr-objects">
+        <div class="vr-obj">🏛️<span>Ancient Rome</span></div>
+        <div class="vr-obj">🧬<span>DNA Lab</span></div>
+        <div class="vr-obj">🌌<span>Cosmos Tour</span></div>
+        <div class="vr-obj">⚗️<span>Chem Lab</span></div>
+        <div class="vr-obj">🦕<span>Prehistory</span></div>
+      </div>
+    </div>
+    <div class="vr-cards reveal">
+      <div class="vr-card">
+        <div class="icon">🌍</div>
+        <h4>Immersive Field Trips</h4>
+        <p>Students travel to the Amazon rainforest, the moon, or inside a human bloodstream — experiencing environments impossible to visit in real life. VR field trips increase information retention by up to 75% compared to textbook learning.</p>
+      </div>
+      <div class="vr-card">
+        <div class="icon">🤝</div>
+        <h4>Collaborative Virtual Spaces</h4>
+        <p>Students from Tokyo, Lagos, and New York can meet in shared virtual classrooms, collaborate on 3D projects, and practice language skills with native speakers through lifelike avatar interactions.</p>
+      </div>
+      <div class="vr-card">
+        <div class="icon">🔬</div>
+        <h4>Safe Skill Practice</h4>
+        <p>Medical students perform virtual surgeries. Engineering students test bridge designs. Pilots practice emergency landings. VR provides infinite safe practice environments where failure is a learning tool, not a consequence.</p>
+      </div>
+      <div class="vr-card">
+        <div class="icon">♿</div>
+        <h4>Inclusive Learning</h4>
+        <p>VR makes education accessible to students with physical disabilities, allowing them to participate in labs, sports, and field experiences previously unavailable to them.</p>
+      </div>
+      <div class="vr-card">
+        <div class="icon">📐</div>
+        <h4>3D Visualization</h4>
+        <p>Abstract concepts in mathematics, physics, and chemistry become tangible 3D objects students can rotate, scale, and interact with — turning the incomprehensible into the intuitive.</p>
+      </div>
+      <div class="vr-card">
+        <div class="icon">🎮</div>
+        <h4>Gamified Exploration</h4>
+        <p>Gamification layers on top of VR environments reward curiosity and exploration. Students earn points by discovering hidden knowledge nodes, completing challenges, and helping peers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMART EDUCATION -->
+<section id="smart-education">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 03 — SMART EDUCATION</span>
+      <h2 class="sec-title">Education Powered<br>by Intelligence</h2>
+      <p class="sec-sub">Smart Education integrates IoT, Big Data, cloud platforms, and AI to create responsive, connected learning ecosystems where every element adapts to learner needs.</p>
+    </div>
+    <div class="smart-grid reveal">
+      <div class="smart-card" style="--accent-c: #00f5d4">
+        <div class="num">01 —</div>
+        <h3>Smart Classrooms</h3>
+        <p>IoT-connected classrooms with smart whiteboards, automated attendance, ambient sensors adjusting lighting and temperature for optimal focus, and real-time teacher dashboards showing individual student comprehension levels.</p>
+      </div>
+      <div class="smart-card" style="--accent-c: #7b2fff">
+        <div class="num">02 —</div>
+        <h3>Personalized Learning Paths</h3>
+        <p>Big Data analysis of millions of learning sessions creates individualized curricula. No two students follow the same path — each receives content perfectly matched to their prior knowledge, learning speed, and cognitive style.</p>
+      </div>
+      <div class="smart-card" style="--accent-c: #ff6b35">
+        <div class="num">03 —</div>
+        <h3>Cloud-Based Learning</h3>
+        <p>Continuous access to world-class education regardless of location. Cloud platforms synchronize progress across devices, enable real-time collaboration, and give every student access to the same quality resources as elite institutions.</p>
+      </div>
+      <div class="smart-card" style="--accent-c: #ffd60a">
+        <div class="num">04 —</div>
+        <h3>Biometric Feedback</h3>
+        <p>Wearable devices track heart rate variability, brain activity patterns, and eye movements to detect optimal cognitive states. AI schedules complex topics during peak focus windows and lighter content during low-energy periods.</p>
+      </div>
+      <div class="smart-card" style="--accent-c: #00f5d4">
+        <div class="num">05 —</div>
+        <h3>Automated Assessment</h3>
+        <p>AI-powered continuous assessment replaces high-stakes exams. Real-time performance data builds a comprehensive learner profile, enabling credentials that accurately reflect demonstrated skills rather than single-test performance.</p>
+      </div>
+      <div class="smart-card" style="--accent-c: #7b2fff">
+        <div class="num">06 —</div>
+        <h3>Teacher Empowerment</h3>
+        <p>Smart Education doesn't replace teachers — it supercharges them. AI handles routine tasks like grading and progress tracking, freeing educators to focus on what humans do best: mentoring, inspiring, and building relationships.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 04 — KNOWLEDGE QUIZ</span>
+      <h2 class="sec-title">Test Your<br>Knowledge</h2>
+      <p class="sec-sub">How much do you know about the future of education? Take this interactive quiz to find out!</p>
+    </div>
+    <div class="quiz-container reveal">
+      <div id="quiz-main">
+        <div class="quiz-progress" id="quiz-progress"></div>
+        <div class="quiz-question" id="quiz-question"></div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+        <div class="quiz-footer">
+          <div class="quiz-score">Score: <span id="quiz-score">0</span> / <span id="quiz-total">0</span></div>
+          <button class="btn-primary" id="quiz-next" onclick="nextQuestion()" style="display:none">Next Question →</button>
+        </div>
+      </div>
+      <div id="quiz-result">
+        <div class="score-big" id="final-score"></div>
+        <p style="color:var(--text-dim);margin:1rem 0" id="final-msg"></p>
+        <button class="btn-primary" onclick="restartQuiz()">Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINI GAME -->
+<section id="mini-game">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 05 — MINI GAME</span>
+      <h2 class="sec-title">Learning Through<br>Play</h2>
+      <p class="sec-sub">Match the education technology concepts in this memory card game! Flip cards to find matching pairs.</p>
+    </div>
+    <div class="game-area reveal">
+      <div class="game-stats-row">
+        <div class="g-stat"><div class="label">Moves</div><div class="value" id="move-count">0</div></div>
+        <div class="g-stat"><div class="label">Matches</div><div class="value" id="match-count">0/8</div></div>
+        <div class="g-stat"><div class="label">Time</div><div class="value" id="game-timer">0s</div></div>
+      </div>
+      <div class="game-board" id="game-board"></div>
+      <button class="btn-primary" onclick="initGame()">🔄 New Game</button>
+    </div>
+  </div>
+</section>
+
+<!-- SMART LEARNING -->
+<section id="smart-learning">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 06 — SMART LEARNING</span>
+      <h2 class="sec-title">Your Personal<br>Learning Universe</h2>
+      <p class="sec-sub">Smart Learning technologies adapt to every individual, creating customized educational journeys that maximize potential and minimize wasted time.</p>
+    </div>
+    <div class="learning-paths reveal">
+      <div class="path-card">
+        <div class="path-header"><span class="path-icon">🧠</span><span class="path-badge badge-ai">AI-Powered</span></div>
+        <div class="path-title">Neural Learning Mapping</div>
+        <p class="path-desc">AI constructs a real-time knowledge graph of everything you know, identifying gaps and optimal next learning steps. The algorithm predicts which concepts you'll master fastest and sequences them for maximum efficiency.</p>
+        <div class="path-progress"><div class="path-bar" style="width:78%"></div></div>
+        <div class="path-meta"><span>78% avg mastery gain</span><span>4.2M students</span></div>
+      </div>
+      <div class="path-card">
+        <div class="path-header"><span class="path-icon">🎮</span><span class="path-badge badge-hot">Trending</span></div>
+        <div class="path-title">Gamified Micro-Learning</div>
+        <p class="path-desc">Content delivered in 3–7 minute focused bursts with game mechanics — points, levels, streaks, achievements. Micro-learning boosts retention by 80% compared to traditional hour-long lectures by leveraging the brain's natural reward system.</p>
+        <div class="path-progress"><div class="path-bar" style="width:91%"></div></div>
+        <div class="path-meta"><span>91% completion rate</span><span>12.8M students</span></div>
+      </div>
+      <div class="path-card">
+        <div class="path-header"><span class="path-icon">🌐</span><span class="path-badge badge-new">New</span></div>
+        <div class="path-title">Social Collaborative Learning</div>
+        <p class="path-desc">AI-matched study groups pair students with complementary knowledge gaps. Peer teaching is scientifically proven to reinforce understanding — students who teach retain 90% of material versus 10% from passive reading.</p>
+        <div class="path-progress"><div class="path-bar" style="width:65%"></div></div>
+        <div class="path-meta"><span>65% faster completion</span><span>3.1M students</span></div>
+      </div>
+      <div class="path-card">
+        <div class="path-header"><span class="path-icon">🥽</span><span class="path-badge badge-vr">Immersive</span></div>
+        <div class="path-title">Embodied VR Learning</div>
+        <p class="path-desc">Learning through physical action in virtual environments creates strong episodic memory. Students who learn chemistry by virtually "handling" molecules remember 4x more after one month than those using traditional methods.</p>
+        <div class="path-progress"><div class="path-bar" style="width:84%"></div></div>
+        <div class="path-meta"><span>84% better retention</span><span>890K students</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 07 — BENEFITS</span>
+      <h2 class="sec-title">Why the Future<br>of Learning Wins</h2>
+      <p class="sec-sub">The transformation of education brings unprecedented advantages for learners, educators, and society at large.</p>
+    </div>
+    <div class="benefits-grid reveal">
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(0,245,212,0.1)">🌍</div>
+        <div class="b-content">
+          <h4>Universal Access</h4>
+          <p>Digital learning breaks down geographical, economic, and physical barriers. A student in rural Cambodia can access the same quality education as one in Silicon Valley — democratizing knowledge for 4.7 billion people.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(123,47,255,0.1)">⚡</div>
+        <div class="b-content">
+          <h4>Accelerated Learning</h4>
+          <p>Personalized AI tutoring enables students to learn at 1.5–2x the speed of traditional classrooms by eliminating time spent on mastered concepts and focusing precisely on knowledge gaps.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(255,107,53,0.1)">💡</div>
+        <div class="b-content">
+          <h4>Deeper Engagement</h4>
+          <p>Interactive, gamified, and immersive learning experiences increase student engagement by up to 300%. When learning is enjoyable, dropout rates fall dramatically and curiosity flourishes.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(255,214,10,0.1)">📈</div>
+        <div class="b-content">
+          <h4>Real-Time Progress Tracking</h4>
+          <p>Continuous data-driven assessment gives students, parents, and teachers instant visibility into learning progress — replacing anxiety-inducing high-stakes exams with ongoing, accurate performance metrics.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(0,245,212,0.1)">🔄</div>
+        <div class="b-content">
+          <h4>Lifelong Learning Culture</h4>
+          <p>Technology makes learning convenient, micro-sized, and enjoyable enough to continue throughout adulthood. In a world where careers change rapidly, continuous upskilling becomes natural rather than forced.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(123,47,255,0.1)">💰</div>
+        <div class="b-content">
+          <h4>Cost Efficiency</h4>
+          <p>Online and AI-powered education reduces per-student costs by 30–50% while improving outcomes. Digital content doesn't wear out, can be instantly updated, and reaches unlimited students simultaneously.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(255,107,53,0.1)">🏆</div>
+        <div class="b-content">
+          <h4>Skills-Based Credentials</h4>
+          <p>Blockchain-verified micro-credentials replace outdated degree systems, allowing learners to demonstrate specific, verified competencies to employers — making skills, not certificates, the new currency of employment.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="b-icon" style="background:rgba(255,214,10,0.1)">🌱</div>
+        <div class="b-content">
+          <h4>Environmental Sustainability</h4>
+          <p>Digital learning reduces paper consumption, commuting, and physical infrastructure needs. A fully digital school prevents approximately 50 tonnes of CO₂ emissions per year per 500 students.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section id="challenges">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 08 — CHALLENGES</span>
+      <h2 class="sec-title">Hurdles on the<br>Path Forward</h2>
+      <p class="sec-sub">Transformation isn't without friction. Understanding these challenges is the first step to solving them.</p>
+    </div>
+    <div class="challenges-split reveal">
+      <div class="challenge-list">
+        <div class="challenge-item">
+          <div class="c-num">01</div>
+          <div class="c-text"><h5>The Digital Divide</h5><p>2.9 billion people lack reliable internet access. Without bridging this gap, EdTech risks widening global inequality rather than closing it — creating a two-tiered education system based on connectivity.</p></div>
+        </div>
+        <div class="challenge-item">
+          <div class="c-num">02</div>
+          <div class="c-text"><h5>Data Privacy & Security</h5><p>Collecting granular learning data — including behavioral patterns, emotional states, and cognitive profiles — raises serious questions about student privacy, data ownership, and the potential for misuse by corporations or governments.</p></div>
+        </div>
+        <div class="challenge-item">
+          <div class="c-num">03</div>
+          <div class="c-text"><h5>Teacher Training Gap</h5><p>Many educators lack the technical skills to effectively use advanced EdTech tools. Deploying technology without adequate teacher training leads to superficial adoption that fails to unlock genuine pedagogical benefits.</p></div>
+        </div>
+        <div class="challenge-item">
+          <div class="c-num">04</div>
+          <div class="c-text"><h5>Loss of Human Connection</h5><p>Education is fundamentally social. Over-reliance on technology risks undermining the mentor-student relationship, peer collaboration, and the emotional dimensions of learning that are critical for holistic development.</p></div>
+        </div>
+        <div class="challenge-item">
+          <div class="c-num">05</div>
+          <div class="c-text"><h5>Algorithm Bias</h5><p>AI systems trained on biased historical data may perpetuate and amplify educational inequalities, systematically directing different quality content to students based on race, gender, or socioeconomic background.</p></div>
+        </div>
+        <div class="challenge-item">
+          <div class="c-num">06</div>
+          <div class="c-text"><h5>Screen Time & Mental Health</h5><p>Increasing digital learning time raises legitimate concerns about eye strain, attention disorders, social isolation, and the mental health impacts of extended screen exposure — especially for young children.</p></div>
+        </div>
+      </div>
+      <div class="solution-box">
+        <h3>🌟 Solutions on the Horizon</h3>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Starlink & Low-Earth Orbit Satellites:</strong> Elon Musk's Starlink and competitors aim to deliver affordable broadband to every corner of the planet by 2027, eliminating connectivity as a barrier to education.</span></div>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Federated Learning:</strong> AI can be trained without centralizing sensitive student data — keeping private information on local devices while still improving global models.</span></div>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Hybrid Learning Models:</strong> Blending online and in-person education preserves human connection while leveraging technology's strengths — research shows 40% better outcomes than either alone.</span></div>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Ethical AI Frameworks:</strong> UNESCO and national governments are developing binding AI education standards requiring bias audits, transparency reports, and student data rights frameworks.</span></div>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Teacher-Technologist Training:</strong> Micro-credential programs are being created specifically to help teachers master EdTech tools in as little as 40 hours — practical, not theoretical, upskilling.</span></div>
+        <div class="sol-item"><span class="sol-check">✓</span><span class="sol-text"><strong>Offline-First Design:</strong> New EdTech platforms are built to work without internet, syncing data when connectivity is available — ensuring learning continues regardless of infrastructure.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE PREDICTIONS -->
+<section id="predictions">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 09 — FUTURE PREDICTIONS</span>
+      <h2 class="sec-title">What's Coming<br>Next</h2>
+      <p class="sec-sub">Based on current technological trajectories, here are the most likely transformations in education over the next two decades.</p>
+    </div>
+    <div class="predict-grid reveal">
+      <div class="predict-card">
+        <div class="predict-year">2025–2027</div>
+        <div class="predict-icon">🤖</div>
+        <div class="predict-title">AI Tutors Mainstream</div>
+        <p class="predict-desc">AI personal tutors become standard in 50% of schools globally. Every student gets a 24/7 intelligent assistant that knows their entire learning history and can explain any concept in multiple ways.</p>
+        <div class="predict-prob">Probability: 94%</div>
+      </div>
+      <div class="predict-card">
+        <div class="predict-year">2026–2029</div>
+        <div class="predict-icon">🥽</div>
+        <div class="predict-title">VR Classrooms Standard</div>
+        <p class="predict-desc">As VR headset costs fall below $150, virtual classrooms become standard equipment. Weekly VR field trips to historical events, scientific environments, and global locations become part of core curriculum.</p>
+        <div class="predict-prob">Probability: 81%</div>
+      </div>
+      <div class="predict-card">
+        <div class="predict-year">2028–2032</div>
+        <div class="predict-icon">🧬</div>
+        <div class="predict-title">Brain-Computer Learning</div>
+        <p class="predict-desc">Early BCI devices enable "direct learning uploads" — uploading language vocabulary, procedural skills, and factual knowledge directly to long-term memory, reducing learning time by 70%.</p>
+        <div class="predict-prob">Probability: 43%</div>
+      </div>
+      <div class="predict-card">
+        <div class="predict-year">2029–2033</div>
+        <div class="predict-icon">🎓</div>
+        <div class="predict-title">Degree System Replaced</div>
+        <p class="predict-desc">Traditional 4-year degrees become obsolete as employers shift entirely to verified skill portfolios. Learning becomes continuous and project-based rather than institution-based, with blockchain credentials.</p>
+        <div class="predict-prob">Probability: 67%</div>
+      </div>
+      <div class="predict-card">
+        <div class="predict-year">2030–2035</div>
+        <div class="predict-icon">🌐</div>
+        <div class="predict-title">Global Learning Network</div>
+        <p class="predict-desc">A unified global education layer connects every learner on earth. AI translates and localizes content instantly, enabling a Nigerian student to collaborate in real-time with peers in Norway and Japan.</p>
+        <div class="predict-prob">Probability: 78%</div>
+      </div>
+      <div class="predict-card">
+        <div class="predict-year">2035–2045</div>
+        <div class="predict-icon">✨</div>
+        <div class="predict-title">Holographic Classrooms</div>
+        <p class="predict-desc">Mixed reality holographic technology enables teachers to appear life-sized in any room in the world simultaneously. Einstein teaches physics. Marie Curie explains chemistry. Historical figures walk through history lessons.</p>
+        <div class="predict-prob">Probability: 56%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSROOM SIMULATION -->
+<section id="classroom-sim">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 10 — CLASSROOM SIMULATION</span>
+      <h2 class="sec-title">The Future Classroom<br>Is Here</h2>
+      <p class="sec-sub">Experience what a fully integrated future classroom looks and feels like — where every screen, desk, and interaction is enhanced by intelligent technology.</p>
+    </div>
+    <div class="classroom-wrapper reveal">
+      <div class="classroom-header">
+        <h3>🏫 FutureLearn Class 2045 — Quantum Physics</h3>
+        <div class="live-badge"><span class="live-dot"></span> LIVE SESSION</div>
+      </div>
+      <div class="classroom-body">
+        <div class="class-main">
+          <div class="screen">
+            <div class="screen-content">
+              <h4 id="screen-subject">⚛️ Quantum Superposition</h4>
+              <p id="screen-detail">Visualizing wave-particle duality in 3D</p>
+            </div>
+          </div>
+          <div class="screen-controls">
+            <button class="ctrl-btn active" onclick="switchLesson('⚛️ Quantum Superposition','Visualizing wave-particle duality in 3D',this)">Quantum</button>
+            <button class="ctrl-btn" onclick="switchLesson('🧬 DNA Replication','3D molecular animation of base pairing',this)">Biology</button>
+            <button class="ctrl-btn" onclick="switchLesson('📐 Fractal Geometry','Interactive infinite zoom into Mandelbrot set',this)">Math</button>
+            <button class="ctrl-btn" onclick="switchLesson('🌋 Plate Tectonics','Real-time tectonic movement simulation',this)">Earth Science</button>
+          </div>
+        </div>
+        <div class="class-panel">
+          <div class="panel-title">🎓 Students Online (28/30)</div>
+          <div class="student-list">
+            <div class="student-item">
+              <div class="s-avatar" style="background:rgba(0,245,212,0.1)">👧</div>
+              <div class="s-info"><div class="s-name">Aisha M.</div><div class="s-status">🟢 Active · Asking question</div></div>
+              <div class="s-score">98%</div>
+            </div>
+            <div class="student-item">
+              <div class="s-avatar" style="background:rgba(123,47,255,0.1)">👦</div>
+              <div class="s-info"><div class="s-name">Lucas T.</div><div class="s-status">🟡 Reviewing concept</div></div>
+              <div class="s-score">74%</div>
+            </div>
+            <div class="student-item">
+              <div class="s-avatar" style="background:rgba(255,107,53,0.1)">🧑</div>
+              <div class="s-info"><div class="s-name">Yuki S.</div><div class="s-status">🟢 Active · VR mode</div></div>
+              <div class="s-score">91%</div>
+            </div>
+            <div class="student-item">
+              <div class="s-avatar" style="background:rgba(255,214,10,0.1)">👩</div>
+              <div class="s-info"><div class="s-name">Priya K.</div><div class="s-status">🔴 AI flagged: confused</div></div>
+              <div class="s-score">61%</div>
+            </div>
+            <div class="student-item">
+              <div class="s-avatar" style="background:rgba(0,245,212,0.1)">🧒</div>
+              <div class="s-info"><div class="s-name">Omar A.</div><div class="s-status">🟢 Active · Taking notes</div></div>
+              <div class="s-score">88%</div>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1rem;background:rgba(0,245,212,0.05);border-radius:12px;border:1px solid rgba(0,245,212,0.1)">
+            <div style="font-size:0.75rem;color:var(--accent1);font-weight:600;margin-bottom:0.5rem">🤖 AI Insight</div>
+            <div style="font-size:0.78rem;color:var(--text-dim);line-height:1.5">Priya shows confusion patterns. AI is preparing a simplified visual explanation. 3 students are ready for advanced content. Class average comprehension: 82%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 11 — TIMELINE</span>
+      <h2 class="sec-title">The Journey of<br>Education</h2>
+      <p class="sec-sub">From clay tablets to quantum classrooms — the remarkable evolution of how humanity passes knowledge from one generation to the next.</p>
+    </div>
+    <div class="timeline-track reveal">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">~3000 BCE</div>
+        <h3 class="t-title">The First Schools — Cuneiform & Scrolls</h3>
+        <p class="t-desc">Mesopotamian scribal schools teach writing on clay tablets. Ancient Egypt, Greece, and China develop formal oral teaching traditions where students gather around masters to learn philosophy, mathematics, and astronomy. Knowledge is scarce, sacred, and tightly controlled.</p>
+        <div class="t-tags"><span class="t-tag">Clay Tablets</span><span class="t-tag">Oral Tradition</span><span class="t-tag">Scribal Schools</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">1440 CE</div>
+        <h3 class="t-title">Gutenberg's Printing Press — Knowledge Democratized</h3>
+        <p class="t-desc">Johannes Gutenberg's movable type printing press triggers a revolution. Books become affordable for the middle class. Literacy rates soar. The Protestant Reformation, Scientific Revolution, and Age of Enlightenment are all powered by mass-printed knowledge. Education begins to shift from privilege to possibility.</p>
+        <div class="t-tags"><span class="t-tag">Printing Press</span><span class="t-tag">Mass Literacy</span><span class="t-tag">Scientific Revolution</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">1837</div>
+        <h3 class="t-title">Universal Public Education — The Industrial Era School</h3>
+        <p class="t-desc">Horace Mann pioneers the public school system in Massachusetts. The standardized classroom — rows of desks, fixed curricula, age-based grades, and bells — is designed to produce disciplined industrial workers. This model spreads globally and, for better or worse, defines education for the next 150 years.</p>
+        <div class="t-tags"><span class="t-tag">Public Schools</span><span class="t-tag">Compulsory Education</span><span class="t-tag">Standardization</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">1969</div>
+        <h3 class="t-title">The Internet Is Born — ARPANET</h3>
+        <p class="t-desc">The U.S. Department of Defense creates ARPANET, the precursor to the internet. This moment — two computers exchanging a simple message — plants the seed for a global knowledge network that will eventually make any information available to anyone, anywhere, instantly. The seeds of digital education are sown.</p>
+        <div class="t-tags"><span class="t-tag">ARPANET</span><span class="t-tag">Digital Networks</span><span class="t-tag">Information Age</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">2001</div>
+        <h3 class="t-title">Wikipedia & Open Knowledge — Learning Without Gatekeepers</h3>
+        <p class="t-desc">Wikipedia launches, embodying a radical idea: knowledge freely created and shared by everyone. MIT's OpenCourseWare follows, making university lectures globally available for free. The concept of "you must pay an institution to learn" begins its slow death.</p>
+        <div class="t-tags"><span class="t-tag">Wikipedia</span><span class="t-tag">Open Courseware</span><span class="t-tag">Crowd Knowledge</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">2012</div>
+        <h3 class="t-title">The MOOC Revolution — Coursera, edX, Khan Academy</h3>
+        <p class="t-desc">Massive Open Online Courses explode in popularity. Coursera and edX launch with Stanford and MIT content. Khan Academy teaches millions of school children math for free. The "Year of the MOOC" sees 16 million people enroll in online university courses globally — higher education's first real disruption.</p>
+        <div class="t-tags"><span class="t-tag">MOOCs</span><span class="t-tag">Online Universities</span><span class="t-tag">Khan Academy</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">2020</div>
+        <h3 class="t-title">COVID-19 Forces the Great EdTech Experiment</h3>
+        <p class="t-desc">A global pandemic forces 1.6 billion students out of physical classrooms overnight. Zoom, Google Classroom, and Microsoft Teams become essential infrastructure. The crisis reveals both the transformative potential of online education and its deep inequities — accelerating 10 years of EdTech adoption in 10 months.</p>
+        <div class="t-tags"><span class="t-tag">Remote Learning</span><span class="t-tag">Zoom School</span><span class="t-tag">Digital Equity Crisis</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-year">2022–2024</div>
+        <h3 class="t-title">Generative AI Enters the Classroom — ChatGPT Era</h3>
+        <p class="t-desc">ChatGPT's launch triggers a global conversation about the future of homework, assessment, and academic integrity. Within months, AI tutors, essay helpers, and coding assistants become ubiquitous. Education systems scramble to adapt, while forward-thinking schools begin redesigning curricula around human-AI collaboration rather than resisting it.</p>
+        <div class="t-tags"><span class="t-tag">ChatGPT</span><span class="t-tag">AI Tutors</span><span class="t-tag">Academic Integrity Crisis</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="border-color:var(--accent4)"></div>
+        <div class="t-year" style="color:var(--accent4)">2025–2030 →</div>
+        <h3 class="t-title">The Intelligent Education Era — Now Beginning</h3>
+        <p class="t-desc">We stand at the threshold of the most radical transformation in education since Gutenberg's press. Personalized AI tutors, immersive VR classrooms, brain-computer interfaces, and global learning networks are converging. The question is no longer whether education will be transformed — but whether we'll ensure that transformation is equitable, humane, and genuinely empowering for every learner on earth.</p>
+        <div class="t-tags"><span class="t-tag" style="border-color:rgba(255,214,10,0.3);color:var(--accent4);background:rgba(255,214,10,0.1)">AI Education</span><span class="t-tag" style="border-color:rgba(255,214,10,0.3);color:var(--accent4);background:rgba(255,214,10,0.1)">VR Learning</span><span class="t-tag" style="border-color:rgba(255,214,10,0.3);color:var(--accent4);background:rgba(255,214,10,0.1)">BCI</span><span class="t-tag" style="border-color:rgba(255,214,10,0.3);color:var(--accent4);background:rgba(255,214,10,0.1)">Global Access</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Q&A -->
+<section id="qa-section">
+  <div class="container section-pad">
+    <div class="sec-header reveal">
+      <span class="sec-tag">// 12 — AI Q&A SYSTEM</span>
+      <h2 class="sec-title">Ask the AI<br>Tutor</h2>
+      <p class="sec-sub">Have questions about the future of learning? Ask our AI tutor anything and get intelligent, thoughtful answers instantly.</p>
+    </div>
+    <div class="qa-box reveal">
+      <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem">💡 Try a suggested question or type your own:</p>
+      <div class="qa-suggestions">
+        <button class="qa-pill" onclick="askSuggestion(this)">How will AI change teaching?</button>
+        <button class="qa-pill" onclick="askSuggestion(this)">Will schools still exist in 2050?</button>
+        <button class="qa-pill" onclick="askSuggestion(this)">What is personalized learning?</button>
+        <button class="qa-pill" onclick="askSuggestion(this)">How does VR help students learn?</button>
+        <button class="qa-pill" onclick="askSuggestion(this)">What are micro-credentials?</button>
+        <button class="qa-pill" onclick="askSuggestion(this)">Is AI better than human teachers?</button>
+      </div>
+      <div class="qa-messages" id="qa-messages">
+        <div class="msg msg-ai">
+          <div class="sender">🤖 AI TUTOR</div>
+          Hello! I'm your AI tutor specialized in the future of education. I can answer questions about AI learning, VR classrooms, smart education, EdTech trends, and what learning will look like in 2030 and beyond. What would you like to explore?
+        </div>
+      </div>
+      <div class="qa-input-row">
+        <input type="text" class="qa-input" id="qa-input" placeholder="Ask anything about the future of learning..." onkeydown="if(event.key==='Enter')sendQuestion()">
+        <button class="qa-send" onclick="sendQuestion()">Ask AI →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🎓 FutureLearn</div>
+  <p>Exploring the next era of human education — from AI tutors to quantum classrooms.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem">Built with curiosity & vision · The Future of Learning © 2025</p>
+</footer>
+
+<script>
+// ===== SCROLL REVEAL =====
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.1});
+revealEls.forEach(el=>obs.observe(el));
+
+// ===== QUIZ =====
+const questions = [
+  {q:"What percentage more information do students retain in VR compared to reading?",opts:["25%","50%","75%","90%"],ans:2,exp:"Studies show VR increases information retention by up to 75% because immersive experiences create stronger episodic memory traces than passive reading."},
+  {q:"Which technology allows AI to be trained without centralizing private student data?",opts:["Blockchain Learning","Federated Learning","Cloud Computing","Deep Learning"],ans:1,exp:"Federated Learning keeps data on local devices — the AI model improves globally without ever seeing raw private data, preserving student privacy."},
+  {q:"By approximately what year is the EdTech market expected to reach $404 billion?",opts:["2023","2025","2028","2030"],ans:1,exp:"The global EdTech market is projected to reach $404 billion by 2025, driven by AI, VR, and online learning adoption."},
+  {q:"What does 'MOOC' stand for?",opts:["Modern Online Open Course","Massive Open Online Course","Machine-Operated Online Curriculum","Multi-Origin Open Classroom"],ans:1,exp:"MOOC stands for Massive Open Online Course — platforms like Coursera and edX that deliver university-level education to millions for free."},
+  {q:"By how much does micro-learning boost retention compared to hour-long lectures?",opts:["20%","40%","60%","80%"],ans:3,exp:"Research shows micro-learning (3-7 minute focused bursts) boosts knowledge retention by up to 80% by aligning with the brain's natural attention and reward cycles."},
+  {q:"What year did COVID-19 force 1.6 billion students out of physical classrooms?",opts:["2019","2020","2021","2022"],ans:1,exp:"The COVID-19 pandemic in 2020 forced the world's largest educational experiment, with 1.6 billion students suddenly learning remotely."},
+  {q:"Students who TEACH material retain what percentage of it?",opts:["50%","70%","80%","90%"],ans:3,exp:"The 'learning pyramid' shows that teaching others results in ~90% retention — far higher than reading (10%) or lectures (5%). Peer teaching is one of the most effective strategies."},
+  {q:"Which technology uses cryptography to create tamper-proof educational credentials?",opts:["Cloud Storage","Blockchain","Biometrics","Neural Networks"],ans:1,exp:"Blockchain technology creates permanent, unforgeable digital credentials that students own and can share directly with employers — no institution needed to verify."},
+];
+let qIndex=0,score=0,answered=false;
+
+function initQuiz(){
+  qIndex=0;score=0;
+  document.getElementById('quiz-main').style.display='block';
+  document.getElementById('quiz-result').style.display='none';
+  document.getElementById('quiz-score').textContent='0';
+  document.getElementById('quiz-total').textContent='0';
+  renderQuestion();
+}
+function renderQuestion(){
+  const prog=document.getElementById('quiz-progress');
+  prog.innerHTML=questions.map((q,i)=>`<div class="q-dot ${i<qIndex?'done':i===qIndex?'active':''}"></div>`).join('');
+  const q=questions[qIndex];
+  document.getElementById('quiz-question').textContent=`Q${qIndex+1}. ${q.q}`;
+  document.getElementById('quiz-options').innerHTML=q.opts.map((o,i)=>`<button class="q-option" onclick="selectAnswer(${i})">${o}</button>`).join('');
+  document.getElementById('quiz-feedback').style.display='none';
+  document.getElementById('quiz-next').style.display='none';
+  answered=false;
+}
+function selectAnswer(i){
+  if(answered)return;
+  answered=true;
+  const q=questions[qIndex];
+  const opts=document.querySelectorAll('.q-option');
+  opts[i].classList.add(i===q.ans?'correct':'wrong');
+  if(i===q.ans){score++;document.getElementById('quiz-score').textContent=score;}
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById('quiz-feedback');
+  fb.textContent=q.exp;
+  fb.style.display='block';
+  fb.style.background=i===q.ans?'rgba(0,245,212,0.1)':'rgba(255,107,53,0.1)';
+  fb.style.border=`1px solid ${i===q.ans?'rgba(0,245,212,0.3)':'rgba(255,107,53,0.3)'}`;
+  fb.style.color=i===q.ans?'var(--accent1)':'var(--accent3)';
+  document.getElementById('quiz-total').textContent=qIndex+1;
+  document.getElementById('quiz-next').style.display='block';
+}
+function nextQuestion(){
+  qIndex++;
+  if(qIndex>=questions.length){showResult();}else{renderQuestion();}
+}
+function showResult(){
+  document.getElementById('quiz-main').style.display='none';
+  document.getElementById('quiz-result').style.display='block';
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById('final-score').textContent=`${score}/${questions.length}`;
+  const msgs=['Keep exploring — the future of learning awaits! 🌱','Good start! Review the sections above for deeper insights. 📚','Nice work! You know your EdTech fundamentals well. 🎯','Excellent! You understand the future of education deeply. 🏆','Perfect score! You\'re ready to build the future of learning! 🚀'];
+  document.getElementById('final-msg').textContent=msgs[Math.min(Math.floor(score/2),4)];
+}
+function restartQuiz(){initQuiz();}
+initQuiz();
+
+// ===== MEMORY GAME =====
+const gameEmojis = ['🤖','🥽','🧠','📱','🌐','📊','🎮','⚡'];
+let gameCards=[],flipped=[],matched=0,moves=0,gameTimer=null,gameSeconds=0,gameLocked=false;
+
+function initGame(){
+  const board=document.getElementById('game-board');
+  clearInterval(gameTimer);gameSeconds=0;moves=0;matched=0;flipped=[];
+  document.getElementById('move-count').textContent='0';
+  document.getElementById('match-count').textContent='0/8';
+  document.getElementById('game-timer').textContent='0s';
+  const pairs=[...gameEmojis,...gameEmojis].sort(()=>Math.random()-0.5);
+  board.innerHTML=pairs.map((e,i)=>`<div class="game-card" id="gc${i}" onclick="flipCard(${i},'${e}')"><span class="front">❓</span><span class="back">${e}</span></div>`).join('');
+  gameCards=pairs;
+  gameTimer=setInterval(()=>{gameSeconds++;document.getElementById('game-timer').textContent=gameSeconds+'s';},1000);
+}
+function flipCard(i,emoji){
+  const el=document.getElementById('gc'+i);
+  if(gameLocked||el.classList.contains('flipped')||el.classList.contains('matched'))return;
+  el.classList.add('flipped');
+  el.querySelector('.front').style.display='none';
+  el.querySelector('.back').style.display='block';
+  flipped.push({i,emoji,el});
+  if(flipped.length===2){
+    moves++;document.getElementById('move-count').textContent=moves;
+    gameLocked=true;
+    setTimeout(()=>{
+      const [a,b]=flipped;
+      if(a.emoji===b.emoji){
+        a.el.classList.add('matched');b.el.classList.add('matched');
+        matched++;document.getElementById('match-count').textContent=matched+'/8';
+        if(matched===8){clearInterval(gameTimer);setTimeout(()=>alert(`🎉 You won! ${moves} moves, ${gameSeconds} seconds!`),200);}
+      }else{
+        a.el.classList.remove('flipped');b.el.classList.remove('flipped');
+        a.el.querySelector('.front').style.display='block';a.el.querySelector('.back').style.display='none';
+        b.el.querySelector('.front').style.display='block';b.el.querySelector('.back').style.display='none';
+      }
+      flipped=[];gameLocked=false;
+    },900);
+  }
+}
+initGame();
+
+// ===== CLASSROOM SIM =====
+function switchLesson(subject,detail,btn){
+  document.getElementById('screen-subject').textContent=subject;
+  document.getElementById('screen-detail').textContent=detail;
+  document.querySelectorAll('.ctrl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== AI Q&A =====
+const qaKB = {
+  "ai":{"How will AI change teaching?":"AI will transform teachers from information deliverers into learning facilitators and mentors. Routine tasks like grading, progress tracking, and generating practice exercises will be fully automated. Teachers will focus on emotional support, creativity, critical thinking, and building genuine human connections with students — the things AI cannot replicate. Studies predict teacher productivity will increase 40% while job satisfaction also improves significantly."},
+  "school":{"Will schools still exist in 2050?":"Yes, but transformed beyond recognition. Physical schools will exist as social hubs, creativity labs, and community centers rather than information transmission facilities. The 'school' of 2050 will be a dynamic space for collaboration, mentorship, and hands-on projects — with AI handling personalized knowledge delivery. The rigid age-based, bell-scheduled classroom will be replaced by flexible, project-based learning environments."},
+  "personal":{"What is personalized learning?":"Personalized learning uses AI and data analytics to create unique educational experiences for each student. Rather than every student following the same curriculum at the same pace, AI maps each learner's knowledge, identifies their gaps, analyzes their learning style, and delivers perfectly tailored content. Research shows personalized learning improves outcomes by 30-50% and can halve the time needed to master new subjects."},
+  "vr":{"How does VR help students learn?":"VR creates immersive, experiential learning that engages multiple senses simultaneously. The brain forms stronger memories from experiences than from passive reading. Students in VR can walk through ancient Rome, conduct chemistry experiments, or practice surgical techniques — all safely. Key benefits: 75% better retention, 300% higher engagement, elimination of 'it's impossible to visualize' barriers in subjects like chemistry and physics."},
+  "credential":{"What are micro-credentials?":"Micro-credentials are short, focused, verifiable digital certifications that prove specific skills or competencies. Unlike traditional degrees (4 years, broad), micro-credentials can be earned in days or weeks and prove very specific abilities to employers. Stored on blockchain, they cannot be forged. Platforms like Coursera, LinkedIn Learning, and Google Certificates already offer thousands of micro-credentials that many employers now value more than traditional degrees."},
+  "teacher":{"Is AI better than human teachers?":"Neither replaces the other — they're complementary. AI excels at personalization, patience, availability (24/7), data analysis, and adapting to each learner's pace. Human teachers excel at emotional connection, motivation, creativity, moral guidance, and inspiring genuine curiosity. The most powerful educational model combines both: AI handles personalized knowledge delivery while human teachers focus on mentorship, deeper thinking, and building the social-emotional skills that define truly educated people."},
+};
+
+const fallbackResponses = [
+  "That's a fascinating question about the future of learning! The short answer is that education in 2030 will be radically more personalized, immersive, and accessible than today. AI will handle routine instruction while VR creates experiences impossible in traditional classrooms. Would you like me to dive deeper into any specific aspect — AI tutoring, VR classrooms, or global access?",
+  "Great question! The transformation of education is happening faster than most people realize. Key drivers include: AI that adapts to each learner in real-time, VR that makes abstract concepts tangible, and global connectivity bringing world-class teaching to every corner of the planet. What aspect interests you most?",
+  "Education is one of the most exciting fields being transformed by technology right now. The convergence of AI, VR, big data, and connectivity is creating learning experiences our grandparents couldn't have imagined. The most important thing to remember: technology amplifies human potential — it doesn't replace the fundamental human drive to learn and connect.",
+];
+
+function getAIResponse(q){
+  const ql=q.toLowerCase();
+  for(const key in qaKB){
+    if(ql.includes(key)){
+      for(const phrase in qaKB[key]){
+        const words=phrase.toLowerCase().split(' ');
+        if(words.some(w=>ql.includes(w)&&w.length>3)) return qaKB[key][phrase];
+      }
+    }
+  }
+  return fallbackResponses[Math.floor(Math.random()*fallbackResponses.length)];
+}
+
+function sendQuestion(){
+  const inp=document.getElementById('qa-input');
+  const q=inp.value.trim();
+  if(!q)return;
+  addMsg(q,'user');
+  inp.value='';
+  showTyping();
+  setTimeout(()=>{
+    removeTyping();
+    addMsg(getAIResponse(q),'ai');
+  },1200+Math.random()*800);
+}
+
+function askSuggestion(btn){
+  document.getElementById('qa-input').value=btn.textContent;
+  sendQuestion();
+}
+
+function addMsg(text,role){
+  const box=document.getElementById('qa-messages');
+  const div=document.createElement('div');
+  div.className='msg msg-'+role;
+  if(role==='ai') div.innerHTML=`<div class="sender">🤖 AI TUTOR</div>${text}`;
+  else div.textContent=text;
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+}
+
+let typingEl=null;
+function showTyping(){
+  const box=document.getElementById('qa-messages');
+  typingEl=document.createElement('div');
+  typingEl.className='msg msg-ai';
+  typingEl.id='typing-msg';
+  typingEl.innerHTML='<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  box.appendChild(typingEl);
+  box.scrollTop=box.scrollHeight;
+}
+function removeTyping(){
+  if(typingEl){typingEl.remove();typingEl=null;}
+}
+
+// ===== MOUSE EFFECTS =====
+
+// 1. Custom cursor
+const cursor = document.createElement('div');
+cursor.id = 'custom-cursor';
+cursor.innerHTML = '<div class="cur-ring"></div><div class="cur-dot"></div>';
+document.body.appendChild(cursor);
+
+const cursorStyle = document.createElement('style');
+cursorStyle.textContent = `
+  * { cursor: none !important; }
+  #custom-cursor { position: fixed; pointer-events: none; z-index: 99999; top:0;left:0; }
+  .cur-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent1);
+    position: fixed; top:0; left:0;
+    transform: translate(-50%,-50%);
+    transition: transform 0.05s;
+    box-shadow: 0 0 10px var(--accent1), 0 0 20px rgba(0,245,212,0.5);
+    pointer-events:none;
+  }
+  .cur-ring {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid rgba(0,245,212,0.5);
+    position: fixed; top:0; left:0;
+    transform: translate(-50%,-50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+    pointer-events:none;
+    backdrop-filter: blur(1px);
+  }
+  body.hovering .cur-ring {
+    width: 56px; height: 56px;
+    border-color: var(--accent2);
+    background: rgba(123,47,255,0.08);
+  }
+  body.clicking .cur-dot {
+    transform: translate(-50%,-50%) scale(2.5);
+    background: var(--accent2);
+  }
+  body.clicking .cur-ring {
+    width: 20px; height: 20px;
+    border-color: var(--accent2);
+  }
+
+  /* 2. Spotlight / radial glow following mouse */
+  #mouse-spotlight {
+    position: fixed; pointer-events: none; z-index: 0;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,212,0.04) 0%, transparent 70%);
+    transform: translate(-50%,-50%);
+    transition: left 0.12s ease, top 0.12s ease;
+  }
+
+  /* 3. Particle trail */
+  .trail-particle {
+    position: fixed; pointer-events: none; z-index: 9998;
+    border-radius: 50%;
+    animation: trailFade 0.8s ease forwards;
+    transform: translate(-50%,-50%);
+  }
+  @keyframes trailFade {
+    0%   { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(0) translateY(-20px); }
+  }
+
+  /* 4. Magnetic card effect */
+  .mag-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+  /* 5. Ripple on click */
+  .click-ripple {
+    position: fixed; pointer-events: none; z-index: 9997;
+    border-radius: 50%;
+    border: 2px solid var(--accent1);
+    transform: translate(-50%,-50%) scale(0);
+    animation: rippleOut 0.6s ease forwards;
+  }
+  @keyframes rippleOut {
+    0%   { width: 0px; height: 0px; opacity: 1; }
+    100% { width: 120px; height: 120px; opacity: 0; }
+  }
+
+  /* 6. Cursor text label on hover */
+  .cur-label {
+    position: fixed; pointer-events: none; z-index: 99999;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: var(--accent1);
+    background: rgba(5,10,20,0.85);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+    white-space: nowrap; opacity: 0;
+    transition: opacity 0.2s;
+    transform: translate(16px, -50%);
+  }
+  body.hovering .cur-label { opacity: 1; }
+`;
+document.head.appendChild(cursorStyle);
+
+// Spotlight element
+const spotlight = document.createElement('div');
+spotlight.id = 'mouse-spotlight';
+document.body.appendChild(spotlight);
+
+// Cursor label
+const curLabel = document.createElement('div');
+curLabel.className = 'cur-label';
+curLabel.id = 'cur-label';
+document.body.appendChild(curLabel);
+
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+const dot = document.querySelector('.cur-dot');
+const ring = document.querySelector('.cur-ring');
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+
+  // Dot follows exactly
+  dot.style.left = mouseX + 'px';
+  dot.style.top  = mouseY + 'px';
+
+  // Spotlight
+  spotlight.style.left = mouseX + 'px';
+  spotlight.style.top  = mouseY + 'px';
+
+  // Label position
+  curLabel.style.left = mouseX + 'px';
+  curLabel.style.top  = mouseY + 'px';
+
+  // Particle trail
+  spawnParticle(mouseX, mouseY);
+});
+
+// Ring follows with lag
+function animRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top  = ringY + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// Hover detection
+const hoverTargets = 'a, button, .nav-links a, .btn-primary, .btn-outline, .ai-feature, .vr-card, .smart-card, .predict-card, .benefit-item, .vr-obj, .game-card, .q-option, .qa-pill, .path-card, .t-item, .student-item';
+document.querySelectorAll(hoverTargets).forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    document.body.classList.add('hovering');
+    const label = el.dataset.cursorLabel || el.title || el.textContent.trim().substring(0,20) || '';
+    if(label) curLabel.textContent = label;
+  });
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('hovering');
+    curLabel.textContent = '';
+  });
+});
+
+// Click ripple
+document.addEventListener('mousedown', (e) => {
+  document.body.classList.add('clicking');
+  const ripple = document.createElement('div');
+  ripple.className = 'click-ripple';
+  ripple.style.left = e.clientX + 'px';
+  ripple.style.top  = e.clientY + 'px';
+  document.body.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 700);
+});
+document.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
+
+// Particle trail
+const trailColors = ['#00f5d4','#7b2fff','#ff6b35','#ffd60a','#a78bfa'];
+let lastTrail = 0;
+function spawnParticle(x, y) {
+  const now = Date.now();
+  if(now - lastTrail < 40) return; // throttle
+  lastTrail = now;
+  const p = document.createElement('div');
+  p.className = 'trail-particle';
+  const size = 4 + Math.random() * 6;
+  const color = trailColors[Math.floor(Math.random() * trailColors.length)];
+  const offsetX = (Math.random() - 0.5) * 10;
+  const offsetY = (Math.random() - 0.5) * 10;
+  p.style.cssText = `
+    left:${x + offsetX}px; top:${y + offsetY}px;
+    width:${size}px; height:${size}px;
+    background:${color};
+    box-shadow: 0 0 ${size*2}px ${color};
+  `;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 800);
+}
+
+// Magnetic card effect — cards subtly follow cursor on hover
+document.querySelectorAll('.smart-card, .predict-card, .vr-card, .hero-stat, .benefit-item').forEach(card => {
+  card.classList.add('mag-card');
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / rect.width;
+    const dy = (e.clientY - cy) / rect.height;
+    card.style.transform = `perspective(600px) rotateY(${dx * 8}deg) rotateX(${-dy * 8}deg) translateZ(8px)`;
+    card.style.boxShadow = `${-dx * 12}px ${-dy * 12}px 30px rgba(0,245,212,0.15)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+</script>
+</body>
+</html>
